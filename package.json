@@ -1,0 +1,26 @@
+{
+  "name": "foodie-hub-backend",
+  "version": "1.0.0",
+  "description": "foodie hub backend project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ladymary99/foodie-hub-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ladymary99/foodie-hub-backend/issues"
+  },
+  "homepage": "https://github.com/ladymary99/foodie-hub-backend#readme",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
