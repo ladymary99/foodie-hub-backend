@@ -1,6 +1,5 @@
 const pool = require("../db/db");
 
-// افزودن آیتم منو
 exports.addMenuItem = async (req, res) => {
   const { restaurantId } = req.params;
   const { name, price } = req.body;
@@ -15,7 +14,6 @@ exports.addMenuItem = async (req, res) => {
   }
 };
 
-// دریافت منوی یک رستوران
 exports.getMenuByRestaurant = async (req, res) => {
   const { restaurantId } = req.params;
   try {
@@ -29,7 +27,6 @@ exports.getMenuByRestaurant = async (req, res) => {
   }
 };
 
-// ویرایش آیتم منو
 exports.updateMenuItem = async (req, res) => {
   const { id } = req.params;
   const { name, price } = req.body;
@@ -44,7 +41,6 @@ exports.updateMenuItem = async (req, res) => {
   }
 };
 
-// حذف آیتم منو
 exports.deleteMenuItem = async (req, res) => {
   const { id } = req.params;
   try {
@@ -55,7 +51,6 @@ exports.deleteMenuItem = async (req, res) => {
   }
 };
 
-// تغییر وضعیت موجود بودن
 exports.toggleAvailability = async (req, res) => {
   const { id } = req.params;
   try {

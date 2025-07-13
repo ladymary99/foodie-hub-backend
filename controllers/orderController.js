@@ -1,6 +1,5 @@
 const pool = require("../db/db");
 
-// ثبت سفارش جدید
 exports.createOrder = async (req, res) => {
   const { customer_id, restaurant_id, items } = req.body;
   const client = await pool.connect();
@@ -33,7 +32,6 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-// دریافت همه سفارش‌ها
 exports.getAllOrders = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM orders ORDER BY id DESC");
@@ -43,7 +41,6 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
-// دریافت سفارش‌های یک مشتری خاص
 exports.getOrdersByCustomer = async (req, res) => {
   const { customerId } = req.params;
   try {
@@ -72,7 +69,6 @@ exports.updateOrderStatus = async (req, res) => {
   }
 };
 
-// حذف یا کنسل کردن سفارش
 exports.deleteOrder = async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,12 +1,15 @@
-// controllers/restaurantController.js
-const pool = require("../models/db");
+const restaurantModel = require("../models/restaurantModel");
 
-exports.getAllRestaurants = async (req, res) => {
+exports.addRestaurant = async (req, res) => {
+  const { name, address } = req.body;
+  if (!name) {
+    return res.status(400).json({ error: "Restaurant name is required" });
+  }
   try {
-    const result = await pool.query("SELECT * FROM restaurants");
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
+    const newRestaurant = await restaurantModel.createRestaurant(name, address);
+    res.status(201).json(newRestaurant);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 };
