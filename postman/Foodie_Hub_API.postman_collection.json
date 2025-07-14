@@ -1,0 +1,536 @@
+{
+  "info": {
+    "name": "Foodie Hub API",
+    "description": "Complete API collection for Foodie Hub backend testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "restaurant_id",
+      "value": ""
+    },
+    {
+      "key": "customer_id",
+      "value": ""
+    },
+    {
+      "key": "menu_item_id",
+      "value": ""
+    },
+    {
+      "key": "order_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Restaurants",
+      "item": [
+        {
+          "name": "Create Restaurant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Restaurant\",\n  \"description\": \"A test restaurant for API testing\",\n  \"address\": \"123 Test St, Test City\",\n  \"phone\": \"+1-555-TEST\",\n  \"email\": \"test@restaurant.com\",\n  \"cuisineType\": \"International\",\n  \"openingHours\": \"Mon-Sun: 9:00 AM - 9:00 PM\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurants",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"]
+            }
+          }
+        },
+        {
+          "name": "Get All Restaurants",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/restaurants?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurant by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Restaurant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Restaurant Name\",\n  \"description\": \"Updated description\",\n  \"address\": \"456 Updated St, Updated City\",\n  \"phone\": \"+1-555-UPDATED\",\n  \"email\": \"updated@restaurant.com\",\n  \"cuisineType\": \"Updated Cuisine\",\n  \"openingHours\": \"Mon-Sun: 10:00 AM - 10:00 PM\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurant Menu",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}/menu",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}", "menu"]
+            }
+          }
+        },
+        {
+          "name": "Get Restaurant Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}/orders",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Delete Restaurant",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/restaurants/{{restaurant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["restaurants", "{{restaurant_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Menu Items",
+      "item": [
+        {
+          "name": "Create Menu Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"restaurantId\": \"{{restaurant_id}}\",\n  \"name\": \"Test Menu Item\",\n  \"description\": \"A delicious test item\",\n  \"price\": 12.99,\n  \"category\": \"Test Category\",\n  \"preparationTime\": 15\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/menu",
+              "host": ["{{base_url}}"],
+              "path": ["menu"]
+            }
+          }
+        },
+        {
+          "name": "Get Menu Item by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/menu/{{menu_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "{{menu_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Menu Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Menu Item\",\n  \"description\": \"Updated description\",\n  \"price\": 15.99,\n  \"category\": \"Updated Category\",\n  \"preparationTime\": 20,\n  \"isAvailable\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/menu/{{menu_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "{{menu_item_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Toggle Menu Item Availability",
+          "request": {
+            "method": "PATCH",
+            "url": {
+              "raw": "{{base_url}}/menu/{{menu_item_id}}/toggle-availability",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "{{menu_item_id}}", "toggle-availability"]
+            }
+          }
+        },
+        {
+          "name": "Get Popular Menu Items",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/menu/popular/items?limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "popular", "items"],
+              "query": [{ "key": "limit", "value": "10" }]
+            }
+          }
+        },
+        {
+          "name": "Search Menu Items by Category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/menu/search/category?category=pizza",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "search", "category"],
+              "query": [{ "key": "category", "value": "pizza" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Menu Item",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/menu/{{menu_item_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["menu", "{{menu_item_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Customer\",\n  \"phone\": \"+1-555-TEST-CUST\",\n  \"email\": \"test@customer.com\",\n  \"address\": \"123 Customer St, Customer City\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers",
+              "host": ["{{base_url}}"],
+              "path": ["customers"]
+            }
+          }
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["customers"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Customer by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer by Phone",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/phone/+1-555-TEST-CUST",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "phone", "+1-555-TEST-CUST"]
+            }
+          }
+        },
+        {
+          "name": "Search Customers by Name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/search?name=john",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "search"],
+              "query": [{ "key": "name", "value": "john" }]
+            }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Customer Name\",\n  \"phone\": \"+1-555-UPDATED-CUST\",\n  \"email\": \"updated@customer.com\",\n  \"address\": \"456 Updated Customer St, Updated City\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}/orders",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "{{customer_id}}", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer Order History",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}/order-history",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "{{customer_id}}", "order-history"]
+            }
+          }
+        },
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "{{customer_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"{{customer_id}}\",\n  \"restaurantId\": \"{{restaurant_id}}\",\n  \"items\": [\n    {\n      \"menuItemId\": \"{{menu_item_id}}\",\n      \"quantity\": 2,\n      \"specialRequests\": \"Extra sauce\"\n    }\n  ],\n  \"deliveryAddress\": \"123 Delivery Address\",\n  \"specialInstructions\": \"Ring doorbell twice\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/orders",
+              "host": ["{{base_url}}"],
+              "path": ["orders"]
+            }
+          }
+        },
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["orders"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders?status=pending",
+              "host": ["{{base_url}}"],
+              "path": ["orders"],
+              "query": [{ "key": "status", "value": "pending" }]
+            }
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/{{order_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "{{order_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/orders/{{order_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "{{order_id}}", "status"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Customer",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/customer/{{customer_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "customer", "{{customer_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Restaurant",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/restaurant/{{restaurant_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "restaurant", "{{restaurant_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Recent Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/recent?limit=5",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "recent"],
+              "query": [{ "key": "limit", "value": "5" }]
+            }
+          }
+        },
+        {
+          "name": "Get Popular Menu Items",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/popular-menu-items?limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "popular-menu-items"],
+              "query": [{ "key": "limit", "value": "10" }]
+            }
+          }
+        },
+        {
+          "name": "Get Sales Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders/sales-report",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "sales-report"]
+            }
+          }
+        },
+        {
+          "name": "Delete Order",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/orders/{{order_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["orders", "{{order_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["health"]
+        }
+      }
+    }
+  ]
+}
