@@ -10,23 +10,21 @@ async function initializeDatabase() {
     host: process.env.DB_HOST,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    // Don't specify database to connect to default postgres database
   });
 
   try {
-    console.log("🔌 Connecting to PostgreSQL server...");
+    console.log(" Connecting to PostgreSQL server...");
 
-    // Check if database exists, create if it doesn't
     const dbName = process.env.DB_NAME;
     const checkDbQuery = `SELECT 1 FROM pg_database WHERE datname = $1`;
     const dbExists = await adminPool.query(checkDbQuery, [dbName]);
 
     if (dbExists.rows.length === 0) {
-      console.log(`📦 Creating database '${dbName}'...`);
+      console.log(`Creating database '${dbName}'...`);
       await adminPool.query(`CREATE DATABASE "${dbName}"`);
-      console.log(`✅ Database '${dbName}' created successfully`);
+      console.log(`Database '${dbName}' created successfully`);
     } else {
-      console.log(`📦 Database '${dbName}' already exists`);
+      console.log(`Database '${dbName}' already exists`);
     }
 
     await adminPool.end();
@@ -40,15 +38,15 @@ async function initializeDatabase() {
       port: process.env.DB_PORT,
     });
 
-    console.log(`🔌 Connecting to database '${dbName}'...`);
+    console.log(` Connecting to database '${dbName}'...`);
 
     // Read and execute schema file
     const schemaPath = path.join(__dirname, "../../database/schema.sql");
     const schemaSQL = fs.readFileSync(schemaPath, "utf8");
 
-    console.log("📋 Executing database schema...");
+    console.log("Executing database schema...");
     await pool.query(schemaSQL);
-    console.log("✅ Database schema applied successfully");
+    console.log("Database schema applied successfully");
 
     // Verify the setup
     const tablesQuery = `
@@ -59,7 +57,7 @@ async function initializeDatabase() {
     `;
 
     const tables = await pool.query(tablesQuery);
-    console.log("📊 Created tables:");
+    console.log("Created tables:");
     tables.rows.forEach((row) => {
       console.log(`   - ${row.table_name}`);
     });
@@ -70,13 +68,13 @@ async function initializeDatabase() {
       pool.query("SELECT COUNT(*) FROM menu_items"),
     ]);
 
-    console.log("🎯 Sample data loaded:");
+    console.log("Sample data loaded:");
     console.log(`   - Restaurants: ${counts[0].rows[0].count}`);
     console.log(`   - Customers: ${counts[1].rows[0].count}`);
     console.log(`   - Menu Items: ${counts[2].rows[0].count}`);
 
     await pool.end();
-    console.log("🎉 Database initialization completed successfully!");
+    console.log("Database initialization completed successfully!");
   } catch (error) {
     console.error("❌ Database initialization failed:", error.message);
     process.exit(1);
