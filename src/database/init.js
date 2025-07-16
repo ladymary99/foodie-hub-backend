@@ -64,7 +64,6 @@ async function initializeDatabase() {
       console.log(`   - ${row.table_name}`);
     });
 
-    // Count sample data
     const counts = await Promise.all([
       pool.query("SELECT COUNT(*) FROM restaurants"),
       pool.query("SELECT COUNT(*) FROM customers"),
