@@ -48,7 +48,6 @@ async function initializeDatabase() {
     await pool.query(schemaSQL);
     console.log("Database schema applied successfully");
 
-    // Verify the setup
     const tablesQuery = `
       SELECT table_name
       FROM information_schema.tables
